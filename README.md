@@ -1,6 +1,8 @@
 # mkkVideo - Angularjs 1.x Video Player
 
  mkkVideo is Video Player for AngularJS Webapp
+ 
+ [![](assets/sample.png)](http://www.wibowtech.com)
 
 ## Installation
 
