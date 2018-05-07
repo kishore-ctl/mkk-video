@@ -12,7 +12,7 @@ angular.module('mkkVideo').directive('mkkVideo', function () {
             control:'@?'
         },
         template: [
-            '<div class="video-container">',
+            '<div class="video-container" id="video-player-container">',
                 '<div class="media-container">',
                     '<video id="video-player" ng-src="{{vdosrc}}" type="video/mp4">',
                     '</video>',
@@ -80,15 +80,37 @@ angular.module('mkkVideo').directive('mkkVideo', function () {
                 }
             }
 
+           
             $scope.toggleFullscreen = function(){
+                var elem = document.getElementById("video-player-container");
                 if($scope.isFullscreen){
                     $scope.isFullscreen = false;
                     $('.video-container').removeClass('fullscreen');
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+
+
                 }
                 else{
                     $scope.isFullscreen = true;
-                    $('.video-container').addClass('fullscreen');
+                     $('.video-container').addClass('fullscreen');
+                    if (elem.requestFullscreen) {
+                      elem.requestFullscreen();
+                    } else if (elem.mozRequestFullScreen) {
+                      elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullscreen) {
+                      elem.webkitRequestFullscreen();
+                    }
                 }
+               
+                
             }
 
             $("video").on("pause", function (e) {
